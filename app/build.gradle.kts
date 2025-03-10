@@ -2,7 +2,8 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services") // Firebase 설정
+    id("com.google.gms.google-services")
+    alias(libs.plugins.kotlin.android) // Firebase 설정
 }
 
 android {
@@ -49,8 +50,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    viewBinding {
-        enable = true
+
+    kotlinOptions {
+        jvmTarget = "11"
     }
 }
 
@@ -61,6 +63,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.core.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
