@@ -28,7 +28,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 
-class MainHomeFragment1: Fragment(), OnMapReadyCallback {
+class MainHomeFragment: Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: MainHomeViewModel
     private lateinit var mapManager: MapManager
