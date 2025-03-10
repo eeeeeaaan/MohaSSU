@@ -39,20 +39,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
         NotificationItem notification = notificationList.get(position);
 
-        String userName = notification.getUserName();
+        String userName = notification.userName;
         // 알림 데이터 바인딩
-        if (notification.getActionType().equals("addFr")) {
+        if (notification.actionType.equals("addFr")) {
             holder.message.setText(userName + "과 친구가 되었어요!");
-        } else if (notification.getActionType().equals("newPr")) {
+        } else if (notification.actionType.equals("newPr")) {
             holder.message.setText(userName + "와 새로운 약속이 생성되었어요");
         }
 
         long currentTime = System.currentTimeMillis();
-        holder.timeAgo.setText(getTimeAgo(currentTime - notification.getTimeAgo()));
+        holder.timeAgo.setText(getTimeAgo(currentTime - notification.timeAgo));
 
         // 프로필 이미지 로딩 (Glide 사용)
         Glide.with(context)
-                .load(notification.getProfileImageUrl()) // URL에서 이미지 로드
+                .load(notification.profileImageUrl) // URL에서 이미지 로드
                 .circleCrop()  // 원형으로 잘라서 표시
                 .placeholder(R.drawable.img_basic_profile) // 기본 이미지
                 .error(R.drawable.img_logo) // 오류시 기본 이미지
