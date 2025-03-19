@@ -233,7 +233,7 @@ public class PromiseEditChooseFriendsFragment extends Fragment {
                                         new Time(endHour, endMinute)
 
                                 );
-                                Log.d("fetchCurrentClass", "현재 진행 중인 수업: " + currentClass.getClassTitle());
+                                Log.d("fetchCurrentClass", "현재 진행 중인 수업: " + currentClass.classTitle);
                                 break;
                             }
 

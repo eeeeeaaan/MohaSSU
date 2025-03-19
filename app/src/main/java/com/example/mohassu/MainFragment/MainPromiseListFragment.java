@@ -119,8 +119,8 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
     private void openPromiseCheckFragment(Promise promise) {
         // Promise 데이터를 Bundle에 담기
         Bundle bundle = new Bundle();
-        bundle.putString("PROMISE_ID", promise.getId());
-        bundle.putString("PROMISE_TITLE", promise.getDescription());
+        bundle.putString("PROMISE_ID", promise.id);
+        bundle.putString("PROMISE_TITLE", promise.description);
         // 필요한 다른 데이터들도 추가
 
         // PromiseCheckFragment 인스턴스 생성 및 인자 전달
@@ -134,7 +134,7 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                 .addToBackStack(null) // 뒤로가기 스택에 추가
                 .commit();
 
-        Log.d(TAG, "Opened PromiseCheckFragment for Promise ID: " + promise.getId());
+        Log.d(TAG, "Opened PromiseCheckFragment for Promise ID: " + promise.id);
     }
 
     @Override
@@ -235,11 +235,11 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                     Promise promise = parsePromise(document);
                     if (promise != null) {
                         // 현재 사용자의 프로필 정보를 ViewModel에서 가져와 설정
-                        promise.setHostNickname(userProfileViewModel.getNickname().getValue());
+                        promise.hostNickname = userProfileViewModel.getNickname().getValue();
                         Uri photoUri = userProfileViewModel.getPhotoUri().getValue();
-                        promise.setHostProfileImageUrl(photoUri != null ? photoUri.toString() : null);
+                        promise.hostProfileImageUrl = photoUri != null ? photoUri.toString() : null;
                         hostPromises.add(promise);
-                        Log.d(TAG, "Host Promise Added: " + promise.getId());
+                        Log.d(TAG, "Host Promise Added: " + promise.id);
                     }
                 }
 
@@ -262,7 +262,7 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                                 if (promise != null) {
                                     participantPromises.add(promise);
                                     hostRefs.add(hostRef);
-                                    Log.d(TAG, "Participant Promise Added: " + promise.getId() + ", Host ID: " + hostRef.getId());
+                                    Log.d(TAG, "Participant Promise Added: " + promise.id + ", Host ID: " + hostRef.getId());
                                 }
                             }
                         }
@@ -334,10 +334,10 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                             Log.d(TAG, "Fetched Host Data - ID: " + userId + ", Nickname: " + nickname + ", Profile URL: " + profileImageUrl);
 
                             for (Promise promise : participantPromises) {
-                                if (promise.getHost() != null && promise.getHost().getId().equals(userId)) {
-                                    promise.setHostNickname(nickname);
-                                    promise.setHostProfileImageUrl(profileImageUrl);
-                                    Log.d(TAG, "Updated Promise: " + promise.getId() + " with Host Nickname: " + nickname);
+                                if (promise.host != null && promise.host.getId().equals(userId)) {
+                                    promise.hostNickname = nickname;
+                                    promise.hostProfileImageUrl = profileImageUrl;
+                                    Log.d(TAG, "Updated Promise: " + promise.id + " with Host Nickname: " + nickname);
                                 }
                             }
                         } else {
@@ -462,10 +462,10 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
      */
     @Override
     public void onEditClick(Promise promise) {
-        Log.d(TAG, "Edit button clicked for Promise ID: " + promise.getId());
+        Log.d(TAG, "Edit button clicked for Promise ID: " + promise.id);
         // PromiseEditFragment으로 이동하면서 약속 ID 전달
         Bundle bundle = new Bundle();
-        bundle.putString("promiseId", promise.getId()); // 약속 ID 전달
+        bundle.putString("promiseId", promise.id); // 약속 ID 전달
 
         // PromiseEditFragment 인스턴스 생성 및 인자 전달
         PromiseEditFragment promiseEditFragment = new PromiseEditFragment();
@@ -478,14 +478,14 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                 .addToBackStack(null) // 뒤로가기 스택에 추가
                 .commit();
 
-        Log.d(TAG, "Opened PromiseEditFragment for Promise ID: " + promise.getId());
+        Log.d(TAG, "Opened PromiseEditFragment for Promise ID: " + promise.id);
     }
 
     public void onItemClick(Promise promise) {
-        Log.d(TAG, "Item clicked for Promise ID: " + promise.getId());
+        Log.d(TAG, "Item clicked for Promise ID: " + promise.id);
         // PromiseCheckFragment으로 이동하면서 약속 ID 전달
         Bundle bundle = new Bundle();
-        bundle.putString("promiseId", promise.getId()); // 약속 ID 전달
+        bundle.putString("promiseId", promise.id); // 약속 ID 전달
 
         // PromiseCheckFragment 인스턴스 생성 및 인자 전달
         PromiseCheckFragment promiseCheckFragment = new PromiseCheckFragment();
@@ -498,6 +498,6 @@ public class MainPromiseListFragment extends Fragment implements PromiseAdapter.
                 .addToBackStack(null) // 뒤로가기 스택에 추가
                 .commit();
 
-        Log.d(TAG, "Opened PromiseCheckFragment for Promise ID: " + promise.getId());
+        Log.d(TAG, "Opened PromiseCheckFragment for Promise ID: " + promise.id);
     }
 }
